@@ -1,0 +1,32 @@
+<div class="flex flex-col items-center mt-8">
+  <div class="flex gap-2 mb-4 items-center">
+    <h2 class="block text-xl font-bold">{{ title }}</h2>
+    <button
+      *ngIf="!disabled"
+      class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      (click)="getImages()"
+    >
+      Reload
+    </button>
+  </div>
+  <div
+    *ngIf="images.length !== numberOfLoadedImages"
+    class="flex items-center justify-center h-screen"
+  >
+    <h3 class="text-xl font-bold animate-bounce h-10 w-10 text-gray-800">
+      Loading...
+    </h3>
+  </div>
+  <div class="flex flex-wrap justify-center gap-4">
+    <div
+      *ngFor="let image of images"
+      class="relative hover:scale-105 transition-all"
+    >
+      <app-image
+        [image]="image"
+        (imageLoaded)="onImageLoaded()"
+        (imageClicked)="onImageClicked($event)"
+      ></app-image>
+    </div>
+  </div>
+</div>
